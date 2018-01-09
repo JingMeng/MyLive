@@ -10,7 +10,8 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-             src/main/cpp/mylive.c )
+             src/main/cpp/mylive.c
+             src/main/cpp/queue.c )
 
 
 find_library( # Sets the name of the path variable.
@@ -28,21 +29,22 @@ set_target_properties( libx264
                       PROPERTIES IMPORTED_LOCATION
                       ${distribution_DIR}/armeabi/libx264.a )
 
-add_library(libfaac
-            STATIC
-            IMPORTED)
+add_library( libfaac
+             STATIC
+             IMPORTED )
 
 set_target_properties( libfaac
-                        PROPERTIES IMPORTED_LOCATION
-                        ${dirtribution_DIR}/armeabi/libfaac.a)
+                      PROPERTIES IMPORTED_LOCATION
+                      ${distribution_DIR}/armeabi/libfaac.a )
 
-add_library(librtmp
+
+add_library( librtmp
             STATIC
             IMPORTED)
 
 set_target_properties( librtmp
                         PROPERTIES IMPORTED_LOCATION
-                        ${dirtribution_DIR}/armeabi/librtmp.a)
+                        ${distribution_DIR}/armeabi/librtmp.a )
 
 
 include_directories(src/main/cpp/x264/include)
@@ -51,6 +53,8 @@ include_directories(src/main/cpp/faac/include)
 
 target_link_libraries( # Specifies the target library.
                        mylive
+                       librtmp
+                       libfaac
                        libx264
 
                        # Links the target library to the log library

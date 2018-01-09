@@ -1,16 +1,30 @@
 package com.sinieco.mylive.pusher;
 
+import com.sinieco.mylive.listener.LiveStateChangeListener;
+
 /**
  * @author BaiMeng on 2018/1/2.
  */
 
 public class PushNative {
 
+    private LiveStateChangeListener mLiveStateChangeListener ;
+
     public native void startPush(String url);
 
     public native void stopPush();
 
     public native void release();
+
+    public void setLiveStateChangeListener(LiveStateChangeListener listener){
+        this.mLiveStateChangeListener = listener ;
+    }
+
+    public void throwNativeError(int code){
+        if(mLiveStateChangeListener != null){
+            mLiveStateChangeListener.onError(code);
+        }
+    }
 
     /**
      * 设置视频宽高

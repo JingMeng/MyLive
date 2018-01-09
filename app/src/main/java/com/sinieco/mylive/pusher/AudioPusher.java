@@ -3,6 +3,7 @@ package com.sinieco.mylive.pusher;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.util.Log;
 
 import com.sinieco.mylive.params.AudioParams;
 
@@ -33,6 +34,7 @@ public class AudioPusher extends Pusher {
     @Override
     public void startPush() {
         isPushing = true ;
+        pushNative.setAudioOptions(audioParams.getSampleRateInHz(),audioParams.getChannel());
         new Thread(new AudioRecordTask()).start();
     }
 
@@ -52,7 +54,6 @@ public class AudioPusher extends Pusher {
     }
 
     class AudioRecordTask implements Runnable {
-
         @Override
         public void run() {
             audioRecord.startRecording();

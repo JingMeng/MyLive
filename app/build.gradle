@@ -20,6 +20,12 @@ android {
                 abiFilters'armeabi'
             }
         }
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_PLATFORM=android-23',
+                        '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=gnustl_static'
+            }
+        }
     }
     buildTypes {
         release {

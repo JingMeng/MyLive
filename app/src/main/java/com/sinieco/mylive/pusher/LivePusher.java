@@ -6,6 +6,7 @@ import android.hardware.camera2.CameraManager;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.sinieco.mylive.listener.LiveStateChangeListener;
 import com.sinieco.mylive.params.AudioParams;
 import com.sinieco.mylive.params.VideoParmas;
 
@@ -19,14 +20,15 @@ public class LivePusher implements SurfaceHolder.Callback {
     private VideoPusher videoPusher ;
     private PushNative pushNative ;
 
-    public LivePusher(SurfaceHolder surfaceHolder) {
+    public LivePusher(SurfaceHolder surfaceHolder, LiveStateChangeListener listener) {
         this.surfaceHolder = surfaceHolder;
         this.surfaceHolder.addCallback(this);
-        prepare();
+        prepare(listener);
     }
 
-    private void prepare() {
-        pushNative = new PushNative() ;
+    private void prepare(LiveStateChangeListener listener) {
+        pushNative = new PushNative();
+        pushNative.setLiveStateChangeListener(listener);
         VideoParmas videoParmas = new VideoParmas(480,320, android.hardware.Camera.CameraInfo.CAMERA_FACING_BACK);
         videoPusher = new VideoPusher(surfaceHolder,videoParmas,pushNative);
 
