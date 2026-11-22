@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    namespace 'com.sinieco.mylive'
+    compileSdk 34
     defaultConfig {
         applicationId "com.sinieco.mylive"
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdk 14
+        targetSdk 34
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         sourceSets{
             main{
                 jniLibs.srcDirs=["libs"]
@@ -17,13 +18,13 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags ""
-                abiFilters'armeabi'
+                abiFilters 'armeabi-v7a'
             }
         }
         externalNativeBuild {
             cmake {
                 arguments '-DANDROID_PLATFORM=android-23',
-                        '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=gnustl_static'
+                        '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_static'
             }
         }
     }
@@ -32,6 +33,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    
     }
     externalNativeBuild {
         cmake {
@@ -42,9 +44,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
+
+
+
+

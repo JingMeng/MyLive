@@ -1,5 +1,6 @@
 
 cmake_minimum_required(VERSION 3.4.1)
+project(mylive LANGUAGES C ASM)
 
 SET(distribution_DIR ../../../../libs)
 
@@ -10,6 +11,7 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
+             src/main/cpp/gcc_thumb_case.S
              src/main/cpp/mylive.c
              src/main/cpp/queue.c )
 
